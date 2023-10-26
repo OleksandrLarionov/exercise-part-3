@@ -4,6 +4,8 @@ import { Col, Row, Form, Button } from 'react-bootstrap';
 class AddComment extends Component {
 	state = {
 		comment: '',
+		rate: '',
+		elementId: '',
 	};
 
 	formSubmit = (e) => {
