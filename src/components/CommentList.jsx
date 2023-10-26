@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Col, Row, ListGroup } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 
 class CommentList extends Component {
 	render() {

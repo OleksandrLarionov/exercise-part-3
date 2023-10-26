@@ -3,8 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { Col } from 'react-bootstrap';
 import { Component } from 'react';
 import CommentArea from './CommentArea';
-import AddComment from './AddComment';
-import CommentList from './CommentList';
+
 class SingleBook extends Component {
 	state = {
 		selected: false,
@@ -29,9 +28,8 @@ class SingleBook extends Component {
 							<Card.Text>{this.props.book.category}</Card.Text>
 						</Card.Body>
 					</Card>
-					{/* {this.state.selected && <CommentList />} */}
 				</Col>
-				<div>{this.state.selected && <CommentArea bookId={this.props.book.asin} />}</div>
+				{this.state.selected && <CommentArea bookId={this.props.book.asin} />}
 			</>
 		);
 	}

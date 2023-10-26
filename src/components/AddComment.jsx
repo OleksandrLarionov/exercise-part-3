@@ -5,34 +5,33 @@ class AddComment extends Component {
 	state = {
 		commentAdd: {
 			comment: '',
-			rating: '1',
+			rate: '1',
 			elementId: this.props.bookId,
 		},
 	};
 
-	formSubmit = (e) => {
+	formSubmit = async (e) => {
 		e.preventDefault();
 
-		fetch('https://striveschool-api.herokuapp.com/api/comments/', {
-			method: 'POST',
-			body: JSON.stringify(this.state.commentAdd),
-			headers: {
-				contentType: 'application/json',
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNjBmYWY2ZTNkZDAwMTQ5NWU0NGEiLCJpYXQiOjE2OTgzMjQ3MzAsImV4cCI6MTY5OTUzNDMzMH0.Wlw5f_Urd-k5h2lUH8SIchHaEY2HVol_3nh8P6Yz8bA',
-			},
-		})
-			.then((res) => {
-				if (res.ok) {
-					console.log('é annata!');
-				} else {
-					throw new Error('Errore Nel Invio');
-				}
-			})
-
-			.catch((err) => {
-				console.log('error', err);
+		try {
+			const response = await fetch('https://striveschool-api.herokuapp.com/api/comments', {
+				method: 'POST',
+				body: JSON.stringify(this.state.commentAdd),
+				headers: {
+					Authorization:
+						'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNjBmYWY2ZTNkZDAwMTQ5NWU0NGEiLCJpYXQiOjE2OTgzMjQ3MzAsImV4cCI6MTY5OTUzNDMzMH0.Wlw5f_Urd-k5h2lUH8SIchHaEY2HVol_3nh8P6Yz8bA',
+					'Content-Type': 'application/json',
+				},
 			});
+			if (response.ok) {
+				// il commento è stato inviato!
+				alert('commento salvato!');
+			} else {
+				throw new Error('errore nel salvataggio del commento');
+			}
+		} catch (error) {
+			console.log('error', error);
+		}
 	};
 	render() {
 		return (
@@ -55,12 +54,12 @@ class AddComment extends Component {
 							/>
 							<Form.Select
 								aria-label='Rate'
-								value={this.state.commentAdd.rating}
+								value={this.state.commentAdd.rate}
 								onChange={(e) => {
 									this.setState({
 										commentAdd: {
 											...this.state.commentAdd,
-											rating: e.target.value,
+											rate: e.target.value,
 										},
 									});
 								}}>
