@@ -9,12 +9,15 @@ class CommentArea extends Component {
 	};
 	getCooments = async () => {
 		try {
-			const response = await fetch('https://striveschool-api.herokuapp.com/api/comments/', {
-				headers: {
-					Authorization:
-						'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNjBmYWY2ZTNkZDAwMTQ5NWU0NGEiLCJpYXQiOjE2OTgzMjQ3MzAsImV4cCI6MTY5OTUzNDMzMH0.Wlw5f_Urd-k5h2lUH8SIchHaEY2HVol_3nh8P6Yz8bA',
-				},
-			});
+			const response = await fetch(
+				'https://striveschool-api.herokuapp.com/api/comments/' + this.props.bookId,
+				{
+					headers: {
+						Authorization:
+							'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNjBmYWY2ZTNkZDAwMTQ5NWU0NGEiLCJpYXQiOjE2OTgzMjQ3MzAsImV4cCI6MTY5OTUzNDMzMH0.Wlw5f_Urd-k5h2lUH8SIchHaEY2HVol_3nh8P6Yz8bA',
+					},
+				}
+			);
 			if (response.ok) {
 				const data = await response.json();
 				this.setState({ comment: data });
@@ -36,7 +39,7 @@ class CommentArea extends Component {
 					<CommentList comment={this.state.comment} />
 				</Col>
 				<Col>
-					<AddComment />
+					<AddComment bookId={this.props.bookId} />
 				</Col>
 			</Row>
 			// <>

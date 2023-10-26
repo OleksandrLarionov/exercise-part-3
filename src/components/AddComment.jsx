@@ -3,18 +3,19 @@ import { Col, Row, Form, Button } from 'react-bootstrap';
 
 class AddComment extends Component {
 	state = {
-		comment: '',
-		rate: '',
-		elementId: '',
+		commentAdd: {
+			comment: '',
+			rating: '1',
+			elementId: this.props.bookId,
+		},
 	};
 
 	formSubmit = (e) => {
 		e.preventDefault();
-		console.log('ora inviamo il commento');
 
 		fetch('https://striveschool-api.herokuapp.com/api/comments/', {
 			method: 'POST',
-			body: JSON.stringify(this.state.comment),
+			body: JSON.stringify(this.state.commentAdd),
 			headers: {
 				contentType: 'application/json',
 				Authorization:
@@ -23,6 +24,7 @@ class AddComment extends Component {
 		})
 			.then((res) => {
 				if (res.ok) {
+					console.log('é annata!');
 				} else {
 					throw new Error('Errore Nel Invio');
 				}
@@ -31,30 +33,48 @@ class AddComment extends Component {
 			.catch((err) => {
 				console.log('error', err);
 			});
-		//  per svotare il form
-		this.setState({
-			comment: '',
-		});
 	};
 	render() {
 		return (
 			<Row>
 				<Col>
-					<Form.Group>
-						<Form.Control
-							type='text'
-							placeholder='Aggiungi un commento'
-							value={this.state.comment}
-							onChange={(e) => {
-								this.setState({
-									comment: e.target.value,
-								});
-							}}
-						/>
-					</Form.Group>
-					<Button variant='primary' type='submit'>
-						Send
-					</Button>
+					<Form onSubmit={this.formSubmit}>
+						<Form.Group>
+							<Form.Control
+								type='text'
+								placeholder='Aggiungi un commento'
+								value={this.state.commentAdd.comment}
+								onChange={(e) => {
+									this.setState({
+										commentAdd: {
+											...this.state.commentAdd,
+											comment: e.target.value,
+										},
+									});
+								}}
+							/>
+							<Form.Select
+								aria-label='Rate'
+								value={this.state.commentAdd.rating}
+								onChange={(e) => {
+									this.setState({
+										commentAdd: {
+											...this.state.commentAdd,
+											rating: e.target.value,
+										},
+									});
+								}}>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+							</Form.Select>
+						</Form.Group>
+						<Button variant='primary' type='submit'>
+							Send
+						</Button>
+					</Form>
 				</Col>
 			</Row>
 		);

@@ -17,7 +17,7 @@ function App() {
 		<div>
 			<MyNav />
 			<Welcome />
-			<CommentArea />
+			{/* <CommentArea /> */}
 
 			<BookList genre={[fantasy, history, horror, romance, scifi]} />
 			{/* <BookList genre={fantasy} /> */}
