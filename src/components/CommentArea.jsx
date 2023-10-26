@@ -34,19 +34,15 @@ class CommentArea extends Component {
 	}
 	render() {
 		return (
-			<Row>
+			<Row className='d-flex flex-column'>
 				<Col>
 					<CommentList comment={this.state.comment} />
 				</Col>
+
 				<Col>
 					<AddComment bookId={this.props.bookId} />
 				</Col>
 			</Row>
-			// <>
-			// 	{this.state.comment.map((comment) => {
-			// 		return <CommentList comment={comment.comment} />;
-			// 	})}
-			// </>
 		);
 	}
 }

@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Col, Row, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 class AddComment extends Component {
 	state = {
@@ -35,47 +35,43 @@ class AddComment extends Component {
 	};
 	render() {
 		return (
-			<Row>
-				<Col>
-					<Form onSubmit={this.formSubmit}>
-						<Form.Group>
-							<Form.Control
-								type='text'
-								placeholder='Aggiungi un commento'
-								value={this.state.commentAdd.comment}
-								onChange={(e) => {
-									this.setState({
-										commentAdd: {
-											...this.state.commentAdd,
-											comment: e.target.value,
-										},
-									});
-								}}
-							/>
-							<Form.Select
-								aria-label='Rate'
-								value={this.state.commentAdd.rate}
-								onChange={(e) => {
-									this.setState({
-										commentAdd: {
-											...this.state.commentAdd,
-											rate: e.target.value,
-										},
-									});
-								}}>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
-							</Form.Select>
-						</Form.Group>
-						<Button variant='primary' type='submit'>
-							Send
-						</Button>
-					</Form>
-				</Col>
-			</Row>
+			<Form onSubmit={this.formSubmit}>
+				<Form.Group>
+					<Form.Control
+						type='text'
+						placeholder='Aggiungi un commento'
+						value={this.state.commentAdd.comment}
+						onChange={(e) => {
+							this.setState({
+								commentAdd: {
+									...this.state.commentAdd,
+									comment: e.target.value,
+								},
+							});
+						}}
+					/>
+					<Form.Select
+						aria-label='Rate'
+						value={this.state.commentAdd.rate}
+						onChange={(e) => {
+							this.setState({
+								commentAdd: {
+									...this.state.commentAdd,
+									rate: e.target.value,
+								},
+							});
+						}}>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+					</Form.Select>
+				</Form.Group>
+				<Button variant='primary' type='submit'>
+					Send
+				</Button>
+			</Form>
 		);
 	}
 }

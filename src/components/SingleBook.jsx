@@ -15,9 +15,7 @@ class SingleBook extends Component {
 				<Col md={3} key={this.props.book.asin} className='my-2'>
 					<Card
 						className={
-							this.state.selected
-								? 'border border-warning border-4 h-100'
-								: 'border-none h-100'
+							this.state.selected ? 'border border-warning border-4' : 'border-none h-100'
 						}
 						onClick={() => {
 							this.setState({ selected: !this.state.selected });
